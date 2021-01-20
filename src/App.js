@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import React from "react";
+import ArtistCard from "./components/artist-card.js";
+import SearchBar from "./components/search-bar.js";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <SearchBar />
+        <div className="container">
+          <div className="row">
+            <ArtistCard
+              img="https://images-na.ssl-images-amazon.com/images/I/51WEA3EBB1L.jpg"
+              titulo="Iron Maiden"
+            />
+            <ArtistCard
+              img="https://images-na.ssl-images-amazon.com/images/I/51WEA3EBB1L.jpg"
+              titulo="Dream Theater"
+            />
+            <ArtistCard
+              img="https://images-na.ssl-images-amazon.com/images/I/51WEA3EBB1L.jpg"
+              titulo="Slayer"
+            />
+            <ArtistCard
+              img="https://images-na.ssl-images-amazon.com/images/I/51WEA3EBB1L.jpg"
+              titulo="Fear Factory"
+            />
+          </div>
+        </div>
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
