@@ -5,17 +5,17 @@ import logo from "../logo.svg";
 
 class SearchBar extends React.Component {
   state = {
-    busqueda: ""
+    busqueda: "",
   };
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
     console.log(e.target.name, e.target.value);
   };
-  handleClick = e => {
+  handleClick = (e) => {
     e.preventDefault();
     console.log(e.target.name, "Ouch me apretaron");
   };
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     console.log(e.target.name);
   };
@@ -25,9 +25,7 @@ class SearchBar extends React.Component {
       <React.Fragment>
         <div className="row">
           <div className="col-md-2">
-            
-              <img src={logo} alt="" className="logo-barra" />
-            
+            <img src={logo} alt="" className="logo-barra" />
           </div>
           <div className="col-md-4">
             <form
