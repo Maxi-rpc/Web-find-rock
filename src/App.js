@@ -3,12 +3,13 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import PageSearchResult from "./page-search-result";
 import PageHome from "./page-home.js";
+import PageArtist from "./page-artist.js";
 
 class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <PageHome />
+        <PageArtist />
       </React.Fragment>
     );
   }

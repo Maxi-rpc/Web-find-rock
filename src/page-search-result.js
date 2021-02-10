@@ -4,18 +4,21 @@ import SearchResult from "./components/search-result.js";
 
 class PageSearchResult extends React.Component {
   state = {
-    busqueda:"",
+    busqueda: "",
   };
-  changeHandle = e =>{
+  handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
   render() {
     return (
       <React.Fragment>
-        <SearchBar onChange={this.changeHandle} busqueda={this.state.busqueda}/>
-        <SearchResult busqueda={this.state.busqueda}/>
+        <SearchBar
+          onChange={this.handleChange}
+          busqueda={this.state.busqueda}
+        />
+        <SearchResult busqueda={this.state.busqueda} />
       </React.Fragment>
     );
   }
