@@ -73,26 +73,9 @@ class SearchResult extends React.Component {
         <div className="container">
           <div className="row">
             <h1>{this.props.busqueda}</h1>
-            {this.state.artist.map( (item, i) => {
-                return <ArtistCard img={item.image} titulo={item.name} key={i} />;
+            {this.state.artist.map((item, i) => {
+              return <ArtistCard img={item.image} titulo={item.name} key={i} />;
             })}
-
-            {/*<ArtistCard
-              img="https://images-na.ssl-images-amazon.com/images/I/51WEA3EBB1L.jpg"
-              titulo="Iron Maiden"
-            />
-            <ArtistCard
-              img="https://images-na.ssl-images-amazon.com/images/I/51WEA3EBB1L.jpg"
-              titulo="Dream Theater"
-            />
-            <ArtistCard
-              img="https://images-na.ssl-images-amazon.com/images/I/51WEA3EBB1L.jpg"
-              titulo="Slayer"
-            />
-            <ArtistCard
-              img="https://images-na.ssl-images-amazon.com/images/I/51WEA3EBB1L.jpg"
-              titulo="Fear Factory"
-            />*/}
           </div>
         </div>
       </React.Fragment>
