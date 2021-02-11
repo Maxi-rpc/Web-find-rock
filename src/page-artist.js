@@ -43,8 +43,11 @@ class PageSearchResult extends React.Component {
     });
   };
   componentDidMount() {
+    let artista = this.props.history.location.search.substr(1);
     this.fetchData(
-      "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=Cher&api_key=fdcf06f09a9f1358d1b2d4df6313b88c&format=json"
+      "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" +
+        artista +
+        "&api_key=fdcf06f09a9f1358d1b2d4df6313b88c&format=json"
     );
   }
   fetchData = async (url) => {
@@ -92,7 +95,7 @@ class PageSearchResult extends React.Component {
             </div>
           </div>
           <div className="row centrar">
-            <SimilarArtist />
+            <SimilarArtist data={this.state.data.artist.similar.artist} />
           </div>
         </div>
       </React.Fragment>
