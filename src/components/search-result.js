@@ -13,11 +13,21 @@ class SearchResult extends React.Component {
       },
     },
   };
-  componentDidMount() {
+  componentWillReceiveProps(e) {
+    let termino = e.busqueda;
     this.fetchData(
-      "http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=madonna&api_key=fdcf06f09a9f1358d1b2d4df6313b88c&format=json"
+      "http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=" +
+        termino +
+        "&api_key=fdcf06f09a9f1358d1b2d4df6313b88c&format=json"
     );
   }
+  //componentDidMount() {
+  //this.fetchData(
+  //"http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist=" +
+  //termino +
+  //"&api_key=fdcf06f09a9f1358d1b2d4df6313b88c&format=json"
+  //);
+  //}
 
   fetchData = async (url) => {
     this.setState({
@@ -25,7 +35,6 @@ class SearchResult extends React.Component {
     });
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data, "api");
     if (data.error) {
       this.setState({
         loading: false,
@@ -34,6 +43,7 @@ class SearchResult extends React.Component {
       });
     } else {
       this.setState({
+        error: false,
         loading: false,
         data: data,
       });
@@ -49,7 +59,7 @@ class SearchResult extends React.Component {
         )}
         <div className="container">
           <div className="row">
-            <h1>{this.props.busqueda}</h1>
+            {/*<h1>{this.props.busqueda}</h1>*/}
             {this.state.data.similarartists.artist.map((item, i) => {
               return (
                 <ArtistCard

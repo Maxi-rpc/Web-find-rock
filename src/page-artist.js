@@ -2,15 +2,70 @@ import React, { Component } from "react";
 import SearchBar from "./components/search-bar.js";
 import "./page-artist.css";
 import SimilarArtist from "./components/similar-artist.js";
+import Loading from "./components/loading.js";
+import Error from "./components/error.js";
 
 class PageSearchResult extends React.Component {
   state = {
-    busqueda: "",
+    data: {
+      artist: {
+        image: [
+          { "#text": "" },
+          { "#text": "" },
+          { "#text": "" },
+          { "#text": "" },
+          { "#text": "" },
+        ],
+        bio: {
+          summary: "",
+        },
+        similar: {
+          artist: [
+            {
+              name: "",
+              url: "",
+              image: [
+                { "#text": "" },
+                { "#text": "" },
+                { "#text": "" },
+                { "#text": "" },
+                { "#text": "" },
+              ],
+            },
+          ],
+        },
+      },
+    },
   };
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
+  };
+  componentDidMount() {
+    this.fetchData(
+      "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=Cher&api_key=fdcf06f09a9f1358d1b2d4df6313b88c&format=json"
+    );
+  }
+  fetchData = async (url) => {
+    this.setState({
+      loading: true,
+    });
+    const response = await fetch(url);
+    const data = await response.json();
+    if (data.error) {
+      this.setState({
+        loading: false,
+        error: true,
+        errorMensaje: data.message,
+      });
+    } else {
+      this.setState({
+        error: false,
+        loading: false,
+        data: data,
+      });
+    }
   };
   render() {
     return (
@@ -19,22 +74,21 @@ class PageSearchResult extends React.Component {
           onChange={this.handleChange}
           busqueda={this.state.busqueda}
         />
+        {this.state.loading && <Loading />}
+        {this.state.error && (
+          <Error errorMensaje={this.state.errorMensaje}></Error>
+        )}
         <div className="container">
           <div className="row centrar">
             <div className="col-md-3"></div>
             <div className="col-md-6">
               <img
-                src="https://s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2019/06/25093705/Gustavo-Cerati-Bocanada.jpg"
+                src={this.state.data.artist.image[3]["#text"]}
                 alt=""
                 className="pic-artist top50 margenes50"
               />
-              <h2>Gustavo Cerati</h2>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque
-                quam, consectetur tempore vel ea in recusandae aliquid
-                exercitationem doloribus, mollitia iure incidunt voluptatum
-                doloremque suscipit deleniti optio ex, adipisci non?
-              </p>
+              <h2>{this.state.data.artist.name}</h2>
+              <p>{this.state.data.artist.bio.summary}</p>
             </div>
           </div>
           <div className="row centrar">

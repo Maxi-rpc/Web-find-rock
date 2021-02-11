@@ -7,21 +7,20 @@ class PageSearchResult extends React.Component {
     busqueda: "",
   };
   componentDidMount() {
-    console.log("componentDidMount()", "Luego del metodo render");
+    let search = this.props.history.location.search
+      .substr(1)
+      .replace("%20", " ");
+
+    this.setState({ busqueda: search });
   }
-  componentWillMount() {
-    console.log("componentWillMount()", "antes del metodo render");
-  }
-  componentWillUnmount() {
-    console.log("componentWillUnmount()", "Cuando me fui");
-  }
+  componentWillMount() {}
+  componentWillUnmount() {}
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      busqueda: e.target.value,
     });
   };
   render() {
-    console.log("render()", "Estoy en render");
     return (
       <React.Fragment>
         <SearchBar
