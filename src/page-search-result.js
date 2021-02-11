@@ -12,7 +12,7 @@ class PageSearchResult extends React.Component {
   componentWillMount() {
     console.log("componentWillMount()", "antes del metodo render");
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     console.log("componentWillUnmount()", "Cuando me fui");
   }
   handleChange = (e) => {
